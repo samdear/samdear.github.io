@@ -1,0 +1,33 @@
+body {
+    font-family: Roboto Mono, monospace;
+  }
+  
+  h1 {
+    color: #24a600;
+    font-size: 2em;
+    font-family: Roboto Mono, monospace;
+    border-bottom: 1px solid #ff7700;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+  }
+  
+  .job-title {
+    color: #6bc731;
+    font-weight: bold;
+  }
+  
+  a:link,
+  a:visited {
+    color: #fb6542;
+  }
+  
+  a:hover {
+    text-decoration: none;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
