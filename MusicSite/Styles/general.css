@@ -1,0 +1,32 @@
+body {
+    background-color: black;
+  }
+   
+  h1 {
+      font-family: 'Roboto Mono', monospace;
+      color: white;
+      text-align: center;
+  }
+   
+  h2, h3 {
+      font-family: 'Roboto Mono', monospace;
+      color: white;
+  }
+   
+  p {
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+    font-size: 20px;
+  }
+
+  a, li {
+      font-family: 'Roboto Mono', monospace;
+      color: plum;
+      font-size: 20px;
+  }
+
+  iframe {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
