@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Hip-Hop</title>
-    <link rel="stylesheet" type="text/css" href="../style.css" />
+    <link rel="stylesheet" type="text/css" href="./gallery.css" />
   </head>
   <body>
     <ul>
@@ -11,5 +11,61 @@
       <li><a href="./pop.html">Pop</a></li>
       <li><a class="active" href="./hip-hop.html">Hip-Hop</a></li>
     </ul>
+    <h2><span>HERE ARE SOME GREAT HIP-HOP ALBUMS</span></h2>
+    <div class="container">
+      <div class="polaroid">
+        <p><a href="https://www.youtube.com/watch?v=5OaGBXAzFY0">DAMN</a></p>
+        <img src="./img/albums/damn_kendrick.jpg" />
+      </div>
+      <div class="polaroid">
+        <p>STANKTOPIA</p>
+        <img src="img/albums/064-outkast-stankonia.webp" />
+      </div>
+      <div class="polaroid">
+        <p>THE LOW END THEORY</p>
+        <img
+          src="img/albums/043-A-Tribe-Called-Quest-The-Low-End-Theory.webp"
+        />
+      </div>
+      <div class="polaroid">
+        <p>THE MISEDUCATION</p>
+        <img
+          src="img/albums/010-Lauryn-Hill-the-miseducation-of-lauryn-hill.webp"
+        />
+      </div>
+      <div class="polaroid">
+        <p>ALL EYEZ ON ME</p>
+        <img src="img/albums/436-Tupac-all-Eyez-on-Me.webp" />
+      </div>
+      <div class="polaroid">
+        <p>3 FEET HIGH AND RISING</p>
+        <img src="img/albums/De_La_Soul_-_3_Feet_High_and_Rising_Cover.jpeg" />
+      </div>
+      <div class="polaroid">
+        <p>FLOWER BOY</p>
+        <img src="img/albums/FLOWERBOY_TYLER.jpeg" />
+      </div>
+      <div class="polaroid">
+        <p>2014 FOREST HILLS DRIVE</p>
+        <img src="img/albums/jcole.jpg" />
+      </div>
+      <div class="polaroid">
+        <p>MADVILLAINY</p>
+        <img src="img/albums/MFDOOM.jpeg" />
+      </div>
+      <div class="polaroid">
+        <p>THE CHRONIC</p>
+        <img src="img/albums/DRDRE.jpg" />
+      </div>
+    </div>
+    <p id="repeatText"></p>
+
+    <!-- You're not expected to understand the JS yet! -->
+    <script>
+      const text = "hip to the hop ";
+      const repetitions = 500; // Change this number to repeat more or less
+      document.getElementById("repeatText").innerText =
+        text.repeat(repetitions);
+    </script>
   </body>
 </html>
