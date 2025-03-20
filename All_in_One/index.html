@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All the things we've learned!</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <!-- Navigation Bar with Dropdown -->
+    <div class="topnav">
+      <a href="#home" class="split">Home</a>
+      <a href="#playlist">Playlist</a>
+    </div>
+
+    <!-- Home Section -->
+    <div class="home" id="home">
+      <h1>Brat Appreciation</h1>
+      <p>brat by Charli xcx</p>
+    </div>
+
+    <!-- About Section - Box Model Demo -->
+    <div class="section" id="about">
+      <h2>About This Project</h2>
+      <div class="box-model-demo">
+        <p id="home">
+          This sight is to showcase all the things we've learned in our web
+          development class.
+        </p>
+      </div>
+    </div>
+
+    <!-- Positioning Demo -->
+    <div class="section" id="positioning">
+      <h2>Positioning</h2>
+
+      <div class="position-container">
+        <div class="position-box static">Static</div>
+        <div class="position-box relative">Relative</div>
+        <div class="position-box absolute">Absolute</div>
+        <div class="position-box fixed">Fixed</div>
+        <div class="position-box sticky">Sticky</div>
+      </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="section" id="gallery">
+      <h2>brat evolution</h2>
+      <div class="gallery-container">
+        <div class="gallery-item">
+          <img id="albumImage" src="./img/brat_01.png" alt="Album Cover" />
+        </div>
+      </div>
+      <button
+        onclick="document.getElementById('albumImage').src='img/brat_01.png'"
+      >
+        brat
+      </button>
+      <button
+        onclick="document.getElementById('albumImage').src='img/brat_02.jpg'"
+      >
+        brat
+      </button>
+      <button
+        onclick="document.getElementById('albumImage').src='img/brat_3.jpeg'"
+      >
+        brat
+      </button>
+    </div>
+
+    <!-- Transform and Transitions -->
+    <div class="section" id="transforms">
+      <h2>Transform and Transitions</h2>
+
+      <div class="transform-container">
+        <div class="transform-box scale">
+          <img src="./img/brat_01.png" />Scale Effect
+        </div>
+        <div class="transform-box rotate">
+          <img src="./img/brat_02.jpg" />Rotate Effect
+        </div>
+        <div class="transform-box skew">
+          <img src="./img/brat_3.jpeg" />Skew Effect
+        </div>
+        <div class="transform-box translate">
+          <img src="./img/brat_02.jpg" />Translate Effect
+        </div>
+      </div>
+    </div>
+
+    <!-- Flexbox Section -->
+    <div class="section" id="flexbox">
+      <h2>Flexbox Demo</h2>
+      <button
+        onclick="document.getElementById('flex-container').style.flexDirection='column'"
+      >
+        Column Layout
+      </button>
+      <button
+        onclick="document.getElementById('flex-container').style.flexDirection='row'"
+      >
+        Row Layout
+      </button>
+      <div class="flex-container" id="flex-container">
+        <div class="flex-item"><img src="./img/brat_01.png" /></div>
+        <div class="flex-item"><img src="./img/brat_01.png" /></div>
+        <div class="flex-item"><img src="./img/brat_01.png" /></div>
+        <div class="flex-item"><img src="./img/brat_01.png" /></div>
+        <div class="flex-item"><img src="./img/brat_01.png" /></div>
+        <div class="flex-item"><img src="./img/brat_01.png" /></div>
+      </div>
+    </div>
+
+    <!-- Playlist Section -->
+    <div class="section" id="playlist">
+      <h2>best brat</h2>
+      <iframe
+        style="border-radius: 12px"
+        src="https://open.spotify.com/embed/track/4w2GLmK2wnioVnb5CPQeex?utm_source=generator"
+        width="100%"
+        height="152"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
+      <iframe
+        style="border-radius: 12px"
+        src="https://open.spotify.com/embed/track/50GxvQA2KEWNt31EdwIlzY?utm_source=generator"
+        width="100%"
+        height="152"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
+      <iframe
+        style="border-radius: 12px"
+        src="https://open.spotify.com/embed/track/0CySZwyRJ0vyUqtSjM9i2k?utm_source=generator"
+        width="100%"
+        height="152"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <!-- Hidden Section for JavaScript Demo -->
+    <div class="section" id="js-demo">
+      <h2>JavaScript Show/Hide Demo</h2>
+      <p id="hidden-content" style="display: none">
+        brat is still a great album
+      </p>
+      <button
+        onclick="document.getElementById('hidden-content').style.display='block'"
+      >
+        Show Hidden Content
+      </button>
+      <button
+        onclick="document.getElementById('hidden-content').style.display='none'"
+      >
+        Hide Content
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>HAVE A GREAT SPRING BREAK!</p>
+    </footer>
+  </body>
+</html>
