@@ -1,4 +1,4 @@
-<form action="https://api.web3forms.com/submit" method="POST">
+<!-- <form action="https://api.web3forms.com/submit" method="POST">
   <input
     type="hidden"
     name="access_key"
@@ -10,4 +10,56 @@
   <textarea name="message" required></textarea>
   <input type="hidden" name="redirect" value="https://web3forms.com/success" />
   <button type="submit">Submit Form</button>
+</form> -->
+<!-- modify this form HTML and place wherever you want your form -->
+<form action="https://formspree.io/f/manedngj" method="POST">
+  <label>
+    Your email:
+    <input type="email" name="email" />
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
 </form>
+<!-- Read the Formbutton docs at formspree.io/formbutton/docs. See more examples at codepen.io/formspree -->
+<script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+<script>
+  /* paste this line in verbatim */
+  window.formbutton =
+    window.formbutton ||
+    function () {
+      (formbutton.q = formbutton.q || []).push(arguments);
+    };
+  /* customize formbutton below*/
+  formbutton("create", {
+    action: "https://formspree.io/f/manedngj",
+    title: "How can we help?",
+    fields: [
+      {
+        type: "email",
+        label: "Email:",
+        name: "email",
+        required: true,
+        placeholder: "your@email.com",
+      },
+      {
+        type: "textarea",
+        label: "Message:",
+        name: "message",
+        placeholder: "What's on your mind?",
+      },
+      { type: "submit" },
+    ],
+    styles: {
+      title: {
+        backgroundColor: "gray",
+      },
+      button: {
+        backgroundColor: "gray",
+      },
+    },
+  });
+</script>
