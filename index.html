@@ -50,4 +50,60 @@
     <ul>
         <li><a href="/All_in_One/index.html">Everything we've learned so far in one page</a></li>
     </ul>
+    <h4>Week 10</h4>
+    <ul>
+        <li><a href="/JS101/index.html">JavaScript 101</a></li>
+    <li><form action="https://formspree.io/f/manedngj" method="POST">My Contact Form |
+        <label>
+          Your email:
+          <input type="email" name="email" />
+        </label>
+        <label>
+          Your message:
+          <textarea name="message"></textarea>
+        </label>
+        <!-- your other form fields go here -->
+        <button type="submit">Send</button>
+      </form>
+      <!-- Read the Formbutton docs at formspree.io/formbutton/docs. See more examples at codepen.io/formspree -->
+      <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+      <script>
+        /* paste this line in verbatim */
+        window.formbutton =
+          window.formbutton ||
+          function () {
+            (formbutton.q = formbutton.q || []).push(arguments);
+          };
+        /* customize formbutton below*/
+        formbutton("create", {
+          action: "https://formspree.io/f/manedngj",
+          title: "How can we help?",
+          fields: [
+            {
+              type: "email",
+              label: "Email:",
+              name: "email",
+              required: true,
+              placeholder: "your@email.com",
+            },
+            {
+              type: "textarea",
+              label: "Message:",
+              name: "message",
+              placeholder: "What's on your mind?",
+            },
+            { type: "submit" },
+          ],
+          styles: {
+            title: {
+              backgroundColor: "gray",
+            },
+            button: {
+              backgroundColor: "gray",
+            },
+          },
+        });
+      </script></li>
+    </ul>
+
 </html>
