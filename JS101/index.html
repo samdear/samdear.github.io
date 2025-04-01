@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Homework Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      section {
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 8px 16px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      .output-box {
+        padding: 10px;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        min-height: 20px;
+        margin-top: 10px;
+      }
+    </style>
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <h1>JavaScript Homework Example</h1>
+
+    <section>
+      <h2>Task 1: Hello World</h2>
+      <div id="output" class="output-box">
+        This text will be changed by JavaScript
+      </div>
+      <button onclick="sayHello()">Run Hello World</button>
+    </section>
+
+    <section>
+      <h2>Task 2: Variable Practice</h2>
+      <p>Check the console to see the variables output</p>
+      <button onclick="showVariables()">Show Variables</button>
+    </section>
+
+    <section>
+      <h2>Task 3: Calculator Function</h2>
+      <p>Check the console to see the calculation results</p>
+      <button onclick="calculate(10, 5)">Calculate 10 & 5</button>
+      <button onclick="calculate(25, 4)">Calculate 25 & 4</button>
+      <button onclick="calculate(100, 7.5)">Calculate 100 & 7.5</button>
+    </section>
+
+    <section>
+      <h2>Task 4: Temperature Converter</h2>
+      <button onclick="convertFahrenheit()">Convert 72°F to Celsius</button>
+      <button onclick="convertCelsius()">Convert 25°C to Fahrenheit</button>
+    </section>
+
+    <section>
+      <h2>Task 5: String Manipulation</h2>
+      <button onclick="manipulateString('JavaScript is fun!')">
+        Analyze "JavaScript is fun!"
+      </button>
+      <button onclick="manipulateString('Hello, World!')">
+        Analyze "Hello, World!"
+      </button>
+    </section>
+
+    <section>
+      <h2>Task 6: Toggle Switch</h2>
+      <div id="lightStatus" class="output-box">Light is ON</div>
+      <button onclick="toggleLight()">Toggle Light</button>
+    </section>
+
+    <section>
+      <h2>Task 7: Counting Loop</h2>
+      <div id="countOutput" class="output-box"></div>
+      <button onclick="countByTwo(20)">Count to 20 by 2s</button>
+    </section>
+  </body>
+</html>
