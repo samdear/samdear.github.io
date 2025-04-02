@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock, Paper, Scissors Games</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .game-container {
+        text-align: center;
+        margin-bottom: 50px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      .divider {
+        height: 2px;
+        background-color: #ccc;
+        margin: 40px 0;
+      }
+      .choices {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 25px 0;
+      }
+      .choice-simple {
+        padding: 12px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .choice-simple:hover {
+        background-color: #45a049;
+      }
+      .choice-advanced {
+        padding: 15px 25px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      .choice-advanced:hover {
+        background-color: #45a049;
+      }
+      .result {
+        margin: 20px 0;
+        font-size: 18px;
+        min-height: 60px;
+      }
+      #reset {
+        padding: 10px 20px;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      #reset:hover {
+        background-color: #d32f2f;
+      }
+      .score {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 20px 0;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+      }
+      .score-item {
+        font-weight: bold;
+      }
+      #restart {
+        padding: 10px 20px;
+        background-color: #008cba;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+      #restart:hover {
+        background-color: #007aa3;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Simple Game -->
+    <div class="game-container">
+      <h1>Simple Rock, Paper, Scissors</h1>
+      <div class="result" id="result-simple">
+        Choose Rock, Paper, or Scissors!
+      </div>
+      <div class="choices">
+        <button class="choice-simple" id="rock-simple">Rock</button>
+        <button class="choice-simple" id="paper-simple">Paper</button>
+        <button class="choice-simple" id="scissors-simple">Scissors</button>
+      </div>
+      <button id="reset">Reset Game</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Advanced Game with Score Tracking -->
+    <div class="game-container">
+      <h2>Advanced Rock, Paper, Scissors</h2>
+      <div class="result" id="result-advanced">
+        Choose Rock, Paper, or Scissors!
+      </div>
+      <div class="choices">
+        <button class="choice-advanced" id="rock-advanced">Rock</button>
+        <button class="choice-advanced" id="paper-advanced">Paper</button>
+        <button class="choice-advanced" id="scissors-advanced">Scissors</button>
+      </div>
+      <div class="score">
+        <div class="score-item">Wins: <span id="wins">0</span></div>
+        <div class="score-item">Ties: <span id="ties">0</span></div>
+        <div class="score-item">Losses: <span id="losses">0</span></div>
+      </div>
+      <button id="restart">Restart Game</button>
+    </div>
+
+    <script>
+      // ---------- SIMPLE GAME CODE ----------
+      // DOM elements for simple game
+      const resultDisplaySimple = document.getElementById("result-simple");
+      const resetButton = document.getElementById("reset");
+
+      // Add event listeners to simple game choice buttons
+      document
+        .getElementById("rock-simple")
+        .addEventListener("click", () => playGameSimple("rock"));
+      document
+        .getElementById("paper-simple")
+        .addEventListener("click", () => playGameSimple("paper"));
+      document
+        .getElementById("scissors-simple")
+        .addEventListener("click", () => playGameSimple("scissors"));
+
+      // Add event listener to reset button
+      resetButton.addEventListener("click", resetGameSimple);
+
+      // Function to play the simple game
+      function playGameSimple(playerChoice) {
+        // Generate computer choice
+        const choices = ["rock", "paper", "scissors"];
+        const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+        // Determine winner
+        let result;
+
+        if (playerChoice === computerChoice) {
+          result = "It's a tie!";
+        } else if (
+          (playerChoice === "rock" && computerChoice === "scissors") ||
+          (playerChoice === "paper" && computerChoice === "rock") ||
+          (playerChoice === "scissors" && computerChoice === "paper")
+        ) {
+          result = "You win!";
+        } else {
+          result = "Computer wins!";
+        }
+
+        // Display results
+        resultDisplaySimple.innerHTML = `
+          You chose ${playerChoice}.<br>
+          Computer chose ${computerChoice}.<br>
+          ${result}
+        `;
+      }
+
+      // Function to reset the simple game
+      function resetGameSimple() {
+        resultDisplaySimple.textContent = "Choose Rock, Paper, or Scissors!";
+      }
+
+      // ---------- ADVANCED GAME CODE ----------
+      // Game variables for advanced game
+      let wins = 0;
+      let ties = 0;
+      let losses = 0;
+
+      // DOM elements for advanced game
+      const resultDisplayAdvanced = document.getElementById("result-advanced");
+      const winsDisplay = document.getElementById("wins");
+      const tiesDisplay = document.getElementById("ties");
+      const lossesDisplay = document.getElementById("losses");
+      const restartButton = document.getElementById("restart");
+
+      // Add event listeners to advanced game choice buttons
+      document
+        .getElementById("rock-advanced")
+        .addEventListener("click", () => playGameAdvanced("rock"));
+      document
+        .getElementById("paper-advanced")
+        .addEventListener("click", () => playGameAdvanced("paper"));
+      document
+        .getElementById("scissors-advanced")
+        .addEventListener("click", () => playGameAdvanced("scissors"));
+
+      // Add event listener to restart button
+      restartButton.addEventListener("click", restartGameAdvanced);
+
+      // Function to play a round of the advanced game
+      function playGameAdvanced(playerChoice) {
+        // Generate computer choice
+        const choices = ["rock", "paper", "scissors"];
+        const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+        // Determine winner
+        let result;
+
+        if (playerChoice === computerChoice) {
+          result = "It's a tie!";
+          ties++;
+        } else if (
+          (playerChoice === "rock" && computerChoice === "scissors") ||
+          (playerChoice === "paper" && computerChoice === "rock") ||
+          (playerChoice === "scissors" && computerChoice === "paper")
+        ) {
+          result = "You win!";
+          wins++;
+        } else {
+          result = "Computer wins!";
+          losses++;
+        }
+
+        // Display results
+        resultDisplayAdvanced.innerHTML = `
+          You chose ${playerChoice}.<br>
+          Computer chose ${computerChoice}.<br>
+          ${result}
+        `;
+
+        // Update score
+        updateScore();
+      }
+
+      // Function to update the score display
+      function updateScore() {
+        winsDisplay.textContent = wins;
+        tiesDisplay.textContent = ties;
+        lossesDisplay.textContent = losses;
+      }
+
+      // Function to restart the advanced game
+      function restartGameAdvanced() {
+        wins = 0;
+        ties = 0;
+        losses = 0;
+        updateScore();
+        resultDisplayAdvanced.textContent = "Choose Rock, Paper, or Scissors!";
+      }
+    </script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock, Paper, Scissors Game</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+      }
+      h1 {
+        color: #333;
+      }
+      .choices {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 25px 0;
+      }
+      .choice {
+        padding: 12px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .choice:hover {
+        background-color: #45a049;
+      }
+      .result {
+        margin: 20px 0;
+        font-size: 18px;
+        min-height: 60px;
+      }
+      #reset {
+        padding: 10px 20px;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      #reset:hover {
+        background-color: #d32f2f;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rock, Paper, Scissors</h1>
+
+    <div class="result" id="result">Choose Rock, Paper, or Scissors!</div>
+
+    <div class="choices">
+      <button class="choice" id="rock">Rock</button>
+      <button class="choice" id="paper">Paper</button>
+      <button class="choice" id="scissors">Scissors</button>
+    </div>
+
+    <button id="reset">Reset Game</button>
+
+    <script>
+      // DOM elements
+      const resultDisplay = document.getElementById("result");
+      const resetButton = document.getElementById("reset");
+
+      // Add event listeners to choice buttons
+      document
+        .getElementById("rock")
+        .addEventListener("click", () => playGame("rock"));
+      document
+        .getElementById("paper")
+        .addEventListener("click", () => playGame("paper"));
+      document
+        .getElementById("scissors")
+        .addEventListener("click", () => playGame("scissors"));
+
+      // Add event listener to reset button
+      resetButton.addEventListener("click", resetGame);
+
+      // Function to play the game
+      function playGame(playerChoice) {
+        // Generate computer choice
+        const choices = ["rock", "paper", "scissors"];
+        const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+        // Determine winner
+        let result;
+
+        if (playerChoice === computerChoice) {
+          result = "It's a tie!";
+        } else if (
+          (playerChoice === "rock" && computerChoice === "scissors") ||
+          (playerChoice === "paper" && computerChoice === "rock") ||
+          (playerChoice === "scissors" && computerChoice === "paper")
+        ) {
+          result = "You win!";
+        } else {
+          result = "Computer wins!";
+        }
+
+        // Display results
+        resultDisplay.innerHTML = `
+                You chose ${playerChoice}.<br>
+                Computer chose ${computerChoice}.<br>
+                ${result}
+            `;
+      }
+
+      // Function to reset the game
+      function resetGame() {
+        resultDisplay.textContent = "Choose Rock, Paper, or Scissors!";
+      }
+    </script>
+  </body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock, Paper, Scissors Game</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+      }
+      h1 {
+        color: #333;
+      }
+      .choices {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 30px 0;
+      }
+      .choice {
+        padding: 15px 25px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      .choice:hover {
+        background-color: #45a049;
+      }
+      .result {
+        margin: 20px 0;
+        font-size: 18px;
+        min-height: 50px;
+      }
+      .score {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 20px 0;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+      }
+      .score-item {
+        font-weight: bold;
+      }
+      #restart {
+        padding: 10px 20px;
+        background-color: #008cba;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+      #restart:hover {
+        background-color: #007aa3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rock, Paper, Scissors</h1>
+
+    <div class="result" id="result">Choose Rock, Paper, or Scissors!</div>
+
+    <div class="choices">
+      <button class="choice" id="rock">Rock</button>
+      <button class="choice" id="paper">Paper</button>
+      <button class="choice" id="scissors">Scissors</button>
+    </div>
+
+    <div class="score">
+      <div class="score-item">Wins: <span id="wins">0</span></div>
+      <div class="score-item">Ties: <span id="ties">0</span></div>
+      <div class="score-item">Losses: <span id="losses">0</span></div>
+    </div>
+
+    <button id="restart">Restart Game</button>
+
+    <script>
+      // Game variables
+      let wins = 0;
+      let ties = 0;
+      let losses = 0;
+
+      // DOM elements
+      const resultDisplay = document.getElementById("result");
+      const winsDisplay = document.getElementById("wins");
+      const tiesDisplay = document.getElementById("ties");
+      const lossesDisplay = document.getElementById("losses");
+      const restartButton = document.getElementById("restart");
+
+      // Add event listeners to choice buttons
+      document
+        .getElementById("rock")
+        .addEventListener("click", () => playGame("rock"));
+      document
+        .getElementById("paper")
+        .addEventListener("click", () => playGame("paper"));
+      document
+        .getElementById("scissors")
+        .addEventListener("click", () => playGame("scissors"));
+
+      // Add event listener to restart button
+      restartButton.addEventListener("click", restartGame);
+
+      // Function to play a round of the game
+      function playGame(playerChoice) {
+        // Generate computer choice
+        const choices = ["rock", "paper", "scissors"];
+        const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+        // Determine winner
+        let result;
+
+        if (playerChoice === computerChoice) {
+          result = "It's a tie!";
+          ties++;
+        } else if (
+          (playerChoice === "rock" && computerChoice === "scissors") ||
+          (playerChoice === "paper" && computerChoice === "rock") ||
+          (playerChoice === "scissors" && computerChoice === "paper")
+        ) {
+          result = "You win!";
+          wins++;
+        } else {
+          result = "Computer wins!";
+          losses++;
+        }
+
+        // Display results
+        resultDisplay.innerHTML = `
+                You chose ${playerChoice}.<br>
+                Computer chose ${computerChoice}.<br>
+                ${result}
+            `;
+
+        // Update score
+        updateScore();
+      }
+
+      // Function to update the score display
+      function updateScore() {
+        winsDisplay.textContent = wins;
+        tiesDisplay.textContent = ties;
+        lossesDisplay.textContent = losses;
+      }
+
+      // Function to restart the game
+      function restartGame() {
+        wins = 0;
+        ties = 0;
+        losses = 0;
+        updateScore();
+        resultDisplay.textContent = "Choose Rock, Paper, or Scissors!";
+      }
+    </script>
+  </body>
+</html> -->
