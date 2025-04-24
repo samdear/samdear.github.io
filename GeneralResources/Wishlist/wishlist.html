@@ -1,0 +1,319 @@
+<!-- Creating a Travel Wishlist Save Feature with Heart Button
+Here's a complete implementation of a wishlist feature using localStorage with a heart button toggle: -->
+<!-- This was generated with the help of claude.ai -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wishlist</title>
+    <style>
+      /* Heart Button Styling */
+      .heart-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        transition: transform 0.2s ease;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+
+      .heart-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .heart-btn:active {
+        transform: scale(0.9);
+      }
+
+      .heart-icon {
+        width: 24px;
+        height: 24px;
+        fill: rgba(255, 255, 255, 0.8);
+        stroke: #ff3366;
+        stroke-width: 1px;
+        transition: all 0.3s ease;
+      }
+
+      /* Active/saved state */
+      .heart-btn.active .heart-icon {
+        fill: #ff3366;
+        animation: heartPulse 0.4s ease-out;
+      }
+
+      /* Heart pulse animation */
+      @keyframes heartPulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.3);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Polaroid styling */
+      .polaroid {
+        position: relative;
+        background: white;
+        padding: 15px 15px 50px 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        width: 250px;
+        transition: transform 0.3s ease;
+      }
+
+      .polaroid:hover {
+        transform: scale(1.03);
+      }
+
+      .polaroid img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .polaroid-info {
+        position: relative;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      /* Wishlist counter styling */
+      .wishlist-counter {
+        background: #ff3366;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        display: inline-block;
+      }
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: white;
+        color: #333;
+        padding: 12px 20px;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .toast-success {
+        border-left: 4px solid #4caf50;
+      }
+
+      .toast-info {
+        border-left: 4px solid #2196f3;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Travel Wishlist</h3>
+    <ul>
+      <li>
+        <strong>Setup</strong> Add the HTML, CSS, and JavaScript to your
+        project.
+      </li>
+      <li>
+        <strong>Data Attributes:</strong> Make sure each polaroid has a unique
+        data-id attribute.
+      </li>
+      <li>
+        <strong>Customization:</strong>
+
+        <ul>
+          Change the heart SVG or use an icon font like Font Awesome
+        </ul>
+        <ul>
+          Adjust the colors in the CSS to match your site's theme
+        </ul>
+        <ul>
+          Modify the feedback mechanism (toast notifications are included but
+          commented out)
+        </ul>
+      </li>
+      <li>
+        <strong>Testing:</strong>Try adding and removing items, then refresh the
+        page to confirm localStorage is working correctly.
+      </li>
+    </ul>
+    <div class="travel-gallery">
+      <div class="polaroid" data-id="paris">
+        <img src="../imgs/paris.jpg" alt="Paris, France" />
+        <div class="polaroid-info">
+          <h3>Paris, France</h3>
+          <button class="heart-btn" aria-label="Add to wishlist">
+            <svg class="heart-icon" viewBox="0 0 24 24">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- More polaroid items -->
+      <div class="polaroid" data-id="tokyo">
+        <img src="../imgs/tokyo.jpg" alt="Tokyo, Japan" />
+        <div class="polaroid-info">
+          <h3>Tokyo, Japan</h3>
+          <button class="heart-btn" aria-label="Add to wishlist">
+            <svg class="heart-icon" viewBox="0 0 24 24">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional: Wishlist Counter in Navigation -->
+    <div class="wishlist-counter">
+      Wishlist: <span id="wishlist-count">0</span>
+    </div>
+    <script>
+      // Initialize the wishlist system
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get all heart buttons
+        const heartButtons = document.querySelectorAll(".heart-btn");
+
+        // Load saved wishlist from localStorage
+        let wishlist = JSON.parse(localStorage.getItem("travelWishlist")) || [];
+
+        // Update heart buttons to reflect saved state
+        updateHeartButtons();
+
+        // Update wishlist counter
+        updateWishlistCounter();
+
+        // Add click event listeners to all heart buttons
+        heartButtons.forEach((button) => {
+          button.addEventListener("click", toggleWishlistItem);
+        });
+
+        // Function to toggle wishlist items
+        function toggleWishlistItem(event) {
+          event.preventDefault();
+
+          // Get the parent polaroid element and its ID
+          const polaroid = this.closest(".polaroid");
+          const locationId = polaroid.dataset.id;
+          const locationName = polaroid.querySelector("h3").textContent;
+
+          // Check if item is already in wishlist
+          const index = wishlist.findIndex((item) => item.id === locationId);
+
+          if (index === -1) {
+            // Add to wishlist
+            wishlist.push({
+              id: locationId,
+              name: locationName,
+              dateAdded: new Date().toISOString(),
+            });
+
+            // Add active class for the animation
+            this.classList.add("active");
+
+            // Show success feedback (optional)
+            showFeedback(`Added ${locationName} to your wishlist!`, "success");
+          } else {
+            // Remove from wishlist
+            wishlist.splice(index, 1);
+
+            // Remove active class
+            this.classList.remove("active");
+
+            // Show removal feedback (optional)
+            showFeedback(`Removed ${locationName} from your wishlist`, "info");
+          }
+
+          // Save updated wishlist to localStorage
+          localStorage.setItem("travelWishlist", JSON.stringify(wishlist));
+
+          // Update wishlist counter
+          updateWishlistCounter();
+        }
+
+        // Function to update all heart buttons based on localStorage data
+        function updateHeartButtons() {
+          heartButtons.forEach((button) => {
+            const polaroid = button.closest(".polaroid");
+            const locationId = polaroid.dataset.id;
+
+            // Check if this location is in the wishlist
+            const isInWishlist = wishlist.some(
+              (item) => item.id === locationId
+            );
+
+            // Update button appearance accordingly
+            if (isInWishlist) {
+              button.classList.add("active");
+            } else {
+              button.classList.remove("active");
+            }
+          });
+        }
+
+        // Function to update the wishlist counter in the navigation
+        function updateWishlistCounter() {
+          const counter = document.getElementById("wishlist-count");
+          if (counter) {
+            counter.textContent = wishlist.length;
+          }
+        }
+
+        // Optional: Show feedback toast message when adding/removing items
+        function showFeedback(message, type) {
+          // Create toast element if it doesn't exist
+          let toast = document.getElementById("wishlist-toast");
+          if (!toast) {
+            toast = document.createElement("div");
+            toast.id = "wishlist-toast";
+            document.body.appendChild(toast);
+          }
+
+          // Set toast message and type
+          toast.textContent = message;
+          toast.className = `toast toast-${type}`;
+
+          // Show toast
+          toast.classList.add("show");
+
+          // Hide toast after 3 seconds
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, 3000);
+        }
+
+        // Optional: Add a function to view the wishlist items
+        window.viewWishlist = function () {
+          if (wishlist.length === 0) {
+            alert("Your travel wishlist is empty!");
+          } else {
+            let message = "Your Travel Wishlist:\n\n";
+            wishlist.forEach((item, index) => {
+              const dateAdded = new Date(item.dateAdded).toLocaleDateString();
+              message += `${index + 1}. ${
+                item.name
+              } (Added on: ${dateAdded})\n`;
+            });
+            alert(message);
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
