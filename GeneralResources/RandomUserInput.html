@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Word Selector</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+        color: #4a4a4a;
+        margin-bottom: 30px;
+      }
+
+      .container {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      textarea {
+        width: 100%;
+        height: 150px;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: vertical;
+        font-size: 16px;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        padding: 10px 15px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        flex: 1;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      button:active {
+        transform: scale(0.98);
+      }
+
+      button#clear {
+        background-color: #f44336;
+      }
+
+      button#clear:hover {
+        background-color: #d32f2f;
+      }
+
+      .result {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .selected-word {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2196f3;
+        margin-top: 10px;
+        padding: 15px;
+        background-color: #e3f2fd;
+        border-radius: 5px;
+        display: inline-block;
+        min-width: 200px;
+      }
+
+      .word-count {
+        color: #666;
+        font-style: italic;
+        margin-bottom: 5px;
+      }
+
+      .error {
+        color: #f44336;
+        margin-top: 10px;
+        font-style: italic;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .shake {
+        animation: shake 0.5s;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        75% {
+          transform: translateX(-5px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Random Word Selector</h1>
+
+      <div>
+        <label for="wordInput"
+          >Enter words (one per line or separated by spaces or commas):</label
+        >
+        <textarea
+          id="wordInput"
+          placeholder="Enter your words here..."
+        ></textarea>
+      </div>
+
+      <div class="buttons">
+        <button id="pickRandom">Pick Random Word</button>
+        <button id="clear">Clear All</button>
+      </div>
+
+      <div class="result">
+        <div class="word-count" id="wordCount"></div>
+        <div id="selectedWord" class="selected-word" style="display: none">
+          No word selected yet
+        </div>
+        <div id="error" class="error" style="display: none"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const wordInput = document.getElementById("wordInput");
+        const pickRandomBtn = document.getElementById("pickRandom");
+        const clearBtn = document.getElementById("clear");
+        const selectedWordElement = document.getElementById("selectedWord");
+        const wordCountElement = document.getElementById("wordCount");
+        const errorElement = document.getElementById("error");
+
+        // Update word count when input changes
+        wordInput.addEventListener("input", updateWordCount);
+
+        // Pick a random word
+        pickRandomBtn.addEventListener("click", pickRandomWord);
+
+        // Clear all inputs and results
+        clearBtn.addEventListener("click", clearAll);
+
+        // Initialize word count
+        updateWordCount();
+
+        function updateWordCount() {
+          const words = getWordList();
+          const count = words.length;
+
+          if (count === 0) {
+            wordCountElement.textContent = "No words entered yet";
+          } else {
+            wordCountElement.textContent = `${count} word${
+              count !== 1 ? "s" : ""
+            } in the list`;
+          }
+        }
+
+        function getWordList() {
+          // Get text and normalize it
+          let text = wordInput.value.trim();
+
+          if (!text) {
+            return [];
+          }
+
+          // Split by newlines, commas, or spaces
+          let words = text
+            .split(/[\n,]+/)
+            .map((word) => word.trim())
+            .filter((word) => word.length > 0);
+
+          // Further split by spaces if needed
+          let result = [];
+          for (let item of words) {
+            // If an item contains spaces, split it further
+            if (item.includes(" ")) {
+              let subWords = item
+                .split(/\s+/)
+                .map((word) => word.trim())
+                .filter((word) => word.length > 0);
+              result.push(...subWords);
+            } else {
+              result.push(item);
+            }
+          }
+
+          return result;
+        }
+
+        function pickRandomWord() {
+          const words = getWordList();
+
+          // Reset any previous animations
+          selectedWordElement.classList.remove("fade-in");
+          selectedWordElement.classList.remove("shake");
+          errorElement.style.display = "none";
+
+          // Check if there are words
+          if (words.length === 0) {
+            errorElement.textContent = "Please enter some words first!";
+            errorElement.style.display = "block";
+            errorElement.classList.add("shake");
+            return;
+          }
+
+          // Pick a random word
+          const randomIndex = Math.floor(Math.random() * words.length);
+          const randomWord = words[randomIndex];
+
+          // Display the selected word with animation
+          selectedWordElement.textContent = randomWord;
+          selectedWordElement.style.display = "inline-block";
+
+          // Trigger reflow to restart animation
+          void selectedWordElement.offsetWidth;
+          selectedWordElement.classList.add("fade-in");
+        }
+
+        function clearAll() {
+          wordInput.value = "";
+          selectedWordElement.style.display = "none";
+          errorElement.style.display = "none";
+          updateWordCount();
+        }
+      });
+    </script>
+  </body>
+</html>
