@@ -2,9 +2,9 @@
 
 body {
     margin: 0;
-    background-image: url(messy.jpg);
-    background-size: cover;
-    /* background: radial-gradient(circle, blue 50%, rgb(114, 114, 246) 100%); */
+    background-image: url(messy.jpeg);
+    background-size: 40%;
+    /* background-size: cover; */
     color: #fff;
     font-family: 'Courier New', Courier, monospace;
     display: flex;
