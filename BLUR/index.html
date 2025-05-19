@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DVD Scene Selection</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="home-screen">
+      <h1><span>Select a Video</span></h1>
+      <div class="scene-buttons">
+        <button
+          style="background-image: url('thumb1.png')"
+          onclick="playVideo('Blur01.mp4')"
+        >
+          <p>Alien</p>
+        </button>
+        <button
+          style="background-image: url('thumb1.png')"
+          onclick="playVideo('Blur01.mp4')"
+        >
+          <p>Moon</p>
+        </button>
+        <button
+          style="background-image: url('thumb1.png')"
+          onclick="playVideo('Blur01.mp4')"
+        >
+          <p>City</p>
+        </button>
+      </div>
+    </div>
+
+    <div id="video-screen" class="hidden">
+      <video id="videoPlayer" controls></video>
+    </div>
+    <div class="ticker">
+      <div class="ticker-track">
+        <div class="ticker-text">
+          sam's desk • sam's desk • sam's desk • sam's desk • sam's desk •
+        </div>
+        <div class="ticker-text">
+          sam's desk • sam's desk • sam's desk • sam's desk • sam's desk •
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

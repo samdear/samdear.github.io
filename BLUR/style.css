@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    background-image: url(messy.jpg);
+    background-size: cover;
+    /* background: radial-gradient(circle, blue 50%, rgb(114, 114, 246) 100%); */
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3em;
+    color: black;
+  }
+
+  h1 span {
+    background-color: #ff0;
+    padding: 20px;
+  }
+
+  #home-screen, #video-screen {
+    text-align: center;
+  }
+  
+  .scene-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  .scene-buttons button {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    width: 30vw;
+    min-width: 300px;
+    max-width: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid #fff;
+    color: black;
+    cursor: pointer;
+    transition: transform 0.3s;
+    box-shadow: #ff0 10px 10px 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0;
+  }
+  
+  .scene-buttons button:hover {
+    transform: scale(1.05);
+  }
+  
+  .scene-buttons button p {
+    background-color: yellow;
+    color: black;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5em;
+    padding: 10px;
+    pointer-events: none;
+  }
+  
+  video {
+    width: 80vw;
+    height: auto;
+    /* border: 5px solid #fff; */
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .ticker {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    border-top: 2px solid yellow;
+  }
+  
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: scroll-text 15s linear infinite;
+  }
+  
+  .ticker-text {
+    white-space: nowrap;
+    color: yellow;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    padding-right: 2rem;
+  }
+  
+  @keyframes scroll-text {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  
