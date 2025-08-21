@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Intro to Web Dev Examples</title>
+    <style>
+        body {
+            font-family: Roboto Mono, monospace;
+            background-color: pink;
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            color: black;
+        }
+        a:hover {
+            color: red;
+        }
+        a:visited {
+            color: hotpink;
+        }
+    </style>
+</head>
+<body>
+    <h1>Intro to Web Dev Examples</h1>
+    <h4>Week 5</h4>
+    <ul>
+        <li><a href="/RecipePage/">Recipe Page</a></li>
+    </ul>
+    <h4>Week 6</h4>
+    <ul>
+        <li><a href="/LinkingExample/">Links, Directories, Servers</a></li>
+        <li><a href="/IntroToCSS/PlainPortfolio/">Intro to CSS: Plain Portfolio</a></li>
+        <li><a href="/NavBar_BoxModel_Positioning_Gallery/">Navigation, Boxes, Position, Gallery</a></li>
+    </ul>
+    <h4>Week 7</h4>
+    <ul>
+        <li><a href="/NavBar_BoxModel_Positioning_Gallery/Genres/hip-hop.html">Gallery Example</a></li>
+        <li><a href="/mdnChallenge/index.html">MDN CSS Challenge</a></li>
+    </ul>
+    <h4>Week 8</h4>
+    <ul>
+        <li><a href="/ResponsiveSites/ResponsiveSite.html">Responsive Site</a></li>
+        <li><a href="/ResponsiveSites/ResponsiveGallery.html">Responsive Gallery</a></li>
+    </ul>
+    <h4>Week 9</h4>
+    <ul>
+        <li>MIDTERMS!</li>
+    </ul>
+    <h4>Spring Break Example</h4>
+    <ul>
+        <li><a href="/All_in_One/index.html">Everything we've learned so far in one page</a></li>
+    </ul>
+    <h4>Week 10</h4>
+    <ul>
+        <li><a href="/JS101/index.html">JavaScript 101</a></li>
+    <li><form action="https://formspree.io/f/manedngj" method="POST">My Contact Form |
+        <label>
+          Your email:
+          <input type="email" name="email" />
+        </label>
+        <label>
+          Your message:
+          <textarea name="message"></textarea>
+        </label>
+        <!-- your other form fields go here -->
+        <button type="submit">Send</button>
+      </form>
+      <!-- Read the Formbutton docs at formspree.io/formbutton/docs. See more examples at codepen.io/formspree -->
+      <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+      <script>
+        /* paste this line in verbatim */
+        window.formbutton =
+          window.formbutton ||
+          function () {
+            (formbutton.q = formbutton.q || []).push(arguments);
+          };
+        /* customize formbutton below*/
+        formbutton("create", {
+          action: "https://formspree.io/f/manedngj",
+          title: "How can we help?",
+          fields: [
+            {
+              type: "email",
+              label: "Email:",
+              name: "email",
+              required: true,
+              placeholder: "your@email.com",
+            },
+            {
+              type: "textarea",
+              label: "Message:",
+              name: "message",
+              placeholder: "What's on your mind?",
+            },
+            { type: "submit" },
+          ],
+          styles: {
+            title: {
+              backgroundColor: "gray",
+            },
+            button: {
+              backgroundColor: "gray",
+            },
+          },
+        });
+      </script></li>
+      <li><a href="/GuessNumber/index.html">Guess the number game</li>
+      <li><a href="/RockPaperScissors/index.html">Rock Paper Scissors</a></li>
+    </ul>
+    <h4>Week 11</h4>
+    <ul>
+    <li><a href="/MoodTracker/moodTracker.html">Mood Tracker</a></li>
+    </ul>
+    <h4>Week 12</h4>
+    <ul>
+        <li><a href="./Fetch_Async/async.html">Studio Ghibli Generator / APIs</a></li>
+    </ul>
+    <h4>Finals Resources</h4>
+    <ul>
+      <li><a href="./GeneralResources/Wishlist/wishlist.html">Wishlist/Liking option</a></li>
+      <li><a href="./GeneralResources/NavAnimation.html">Navigation Animation Example</a></li>
+    </ul>
+</html>
