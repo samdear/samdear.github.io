@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pookie & Sammie Travel Map</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>🌍 Our Travel Map 🌍</h1>
+
+    <!-- p5.js canvas holder -->
+    <div id="p5-canvas"></div>
+
+    <div class="map-container">
+      <img src="https://www.mappr.co/wp-content/uploads/2022/03/world-map-high-definition.jpg" 
+      alt="World Map" />
+
+      <!-- Example Pins
+      <div
+        class="pin"
+        style="top: 55%; left: 42%"
+        data-place="Miami"
+        data-img="https://upload.wikimedia.org/wikipedia/commons/e/e4/Miami_Beach.jpg"
+        data-text="Our sunny trip to Miami! 🌴"
+      ></div>
+
+      <div
+        class="pin"
+        style="top: 40%; left: 60%"
+        data-place="NYC"
+        data-img="https://upload.wikimedia.org/wikipedia/commons/4/4d/NYC_skyline.jpg"
+        data-text="Our time together in New York 🗽"
+      ></div>
+
+      <div
+        class="pin"
+        style="top: 70%; left: 85%"
+        data-place="Dream"
+        data-img="https://upload.wikimedia.org/wikipedia/commons/b/bb/Great_Barrier_Reef_-_Cairns_Australia.jpg"
+        data-text="Someday… Australia adventure! 🐠"
+      ></div>
+    </div> -->
+
+    <!-- Popup -->
+    <div class="overlay"></div>
+    <div class="popup">
+      <img src="" alt="" />
+      <h2 id="popup-title"></h2>
+      <p id="popup-text"></p>
+      <button onclick="closePopup()">Close</button>
+    </div>
+
+    <!-- Script: Map Popup Logic -->
+    <script>
+      const pins = document.querySelectorAll(".pin");
+      const popup = document.querySelector(".popup");
+      const overlay = document.querySelector(".overlay");
+      const popupTitle = document.getElementById("popup-title");
+      const popupText = document.getElementById("popup-text");
+      const popupImg = document.querySelector(".popup img");
+
+      pins.forEach((pin) => {
+        pin.addEventListener("click", () => {
+          popupTitle.textContent = pin.dataset.place;
+          popupText.textContent = pin.dataset.text;
+          popupImg.src = pin.dataset.img;
+
+          popup.style.display = "block";
+          overlay.style.display = "block";
+        });
+      });
+
+      function closePopup() {
+        popup.style.display = "none";
+        overlay.style.display = "none";
+      }
+
+      overlay.addEventListener("click", closePopup);
+    </script>
+
+    <!-- Load p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script>
+      // p5.js sketch
+      let hearts = [];
+      let clouds = [];
+
+      function setup() {
+        let canvas = createCanvas(windowWidth, windowHeight);
+        canvas.parent("p5-canvas");
+        noStroke();
+
+        // make some hearts
+        for (let i = 0; i < 15; i++) {
+          hearts.push({
+            x: random(width),
+            y: random(height, height + 300),
+            speed: random(0.5, 1.5),
+            size: random(12, 20),
+          });
+        }
+
+        // make some clouds
+        for (let i = 0; i < 6; i++) {
+          clouds.push({
+            x: random(width),
+            y: random(height / 8),
+            speed: random(0.2, 0.5),
+            size: random(80, 150),
+          });
+        }
+      }
+
+      function draw() {
+        clear(); // keeps background transparent
+
+        // hearts float up
+        fill(255, 100, 150, 180);
+        for (let h of hearts) {
+          heartShape(h.x, h.y, h.size);
+          h.y -= h.speed;
+          if (h.y < -50) {
+            h.y = height + random(50, 200);
+            h.x = random(width);
+          }
+        }
+
+        // clouds drift sideways
+        fill(255, 255, 255, 200);
+        for (let c of clouds) {
+          ellipse(c.x, c.y, c.size, c.size * 0.6);
+          ellipse(c.x + 30, c.y + 10, c.size * 0.8, c.size * 0.5);
+          ellipse(c.x - 30, c.y + 10, c.size * 0.8, c.size * 0.5);
+          c.x += c.speed;
+          if (c.x > width + 200) {
+            c.x = -200;
+            c.y = random(height / 8);
+          }
+        }
+      }
+
+      function heartShape(x, y, s) {
+        beginShape();
+        vertex(x, y);
+        bezierVertex(x - s / 2, y - s / 2, x - s, y + s / 3, x, y + s);
+        bezierVertex(x + s, y + s / 3, x + s / 2, y - s / 2, x, y);
+        endShape(CLOSE);
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+    </script>
+  </body>
+</html>
