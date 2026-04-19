@@ -1,0 +1,18 @@
+body {
+  background-image: url("../media/imgs/background.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.portfolio-h1 {
+  position: fixed;
+  top: 20%;
+  left: 0;
+  right: 0;
+  display: flex;
+  font-size: 50px;
+  letter-spacing: -0.02em;
+  color: rgb(66, 94, 155);
+  background-color: white;
+}
