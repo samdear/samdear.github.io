@@ -1,0 +1,1463 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summer Rooftop Party</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --cream: #f7f2ea;
+        --parchment: #efe8d8;
+        --warm-dark: #1c1712;
+        --brown: #4a3728;
+        --terracotta: #c4622d;
+        --terra-light: #e8896a;
+        --terra-pale: #f5ddd3;
+        --gold: #c9963a;
+        --gold-pale: #f5edd6;
+        --sage: #6b7e5a;
+        --sage-pale: #e0e8d8;
+        --muted: #8a7968;
+        --border: rgba(74, 55, 40, 0.12);
+        --border-warm: rgba(74, 55, 40, 0.2);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--cream);
+        color: var(--warm-dark);
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ── Texture overlay ── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        opacity: 0.5;
+      }
+
+      /* ── Page shell ── */
+      .page {
+        position: relative;
+        z-index: 1;
+        max-width: 660px;
+        margin: 0 auto;
+        padding: 0 20px 80px;
+      }
+
+      /* ── Hero ── */
+      .hero {
+        padding: 64px 0 48px;
+        border-bottom: 1px solid var(--border-warm);
+        animation: fadeUp 0.8s ease both;
+      }
+      .hero-eyebrow {
+        font-family: "DM Sans", sans-serif;
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--terracotta);
+        font-weight: 500;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .hero-eyebrow::before,
+      .hero-eyebrow::after {
+        content: "";
+        flex: 1;
+        max-width: 40px;
+        height: 1px;
+        background: var(--terracotta);
+        opacity: 0.5;
+      }
+      .hero h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(48px, 8vw, 72px);
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: -1px;
+        color: var(--warm-dark);
+        margin-bottom: 6px;
+      }
+      .hero h1 em {
+        font-style: italic;
+        color: var(--terracotta);
+      }
+      .hero-host {
+        font-family: "Cormorant Garamond", serif;
+        font-style: italic;
+        font-size: 16px;
+        color: var(--muted);
+        margin-bottom: 28px;
+      }
+
+      /* ── Event image ── */
+      .event-image-wrap {
+        position: relative;
+        width: 100%;
+        margin-bottom: 32px;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+      .event-image-wrap img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        display: block;
+        filter: saturate(0.92) contrast(1.03);
+        transition: transform 0.6s ease;
+      }
+      .event-image-wrap:hover img {
+        transform: scale(1.015);
+      }
+
+      .hero-details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 28px;
+      }
+      .hero-detail {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        font-size: 14px;
+        color: var(--brown);
+      }
+      .hero-detail .label {
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 500;
+        min-width: 52px;
+      }
+      .hero-description {
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--brown);
+        max-width: 480px;
+        margin-bottom: 28px;
+        font-weight: 300;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 18px;
+      }
+      .cal-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--terracotta);
+        text-decoration: none;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(196, 98, 45, 0.3);
+        padding-bottom: 2px;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .cal-link:hover {
+        border-color: var(--terracotta);
+      }
+      .cal-link svg {
+        transition: transform 0.2s;
+      }
+      .cal-link:hover svg {
+        transform: translateX(2px);
+      }
+
+      /* ── Stats strip ── */
+      .stats {
+        display: flex;
+        gap: 0;
+        margin: 32px 0 0;
+        border: 1px solid var(--border-warm);
+        border-radius: 2px;
+        overflow: hidden;
+        animation: fadeUp 0.8s 0.1s ease both;
+      }
+      .stat {
+        flex: 1;
+        padding: 16px 20px;
+        text-align: center;
+        border-right: 1px solid var(--border-warm);
+        background: rgba(255, 255, 255, 0.4);
+      }
+      .stat:last-child {
+        border-right: none;
+      }
+      .stat-num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 1;
+        color: var(--warm-dark);
+      }
+      .stat-going .stat-num {
+        color: var(--sage);
+      }
+      .stat-maybe .stat-num {
+        color: var(--gold);
+      }
+      .stat-no .stat-num {
+        color: var(--muted);
+      }
+      .stat-label {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+
+      /* ── Tabs ── */
+      .tabs {
+        display: flex;
+        margin-top: 40px;
+        gap: 0;
+        border-bottom: 1px solid var(--border-warm);
+        animation: fadeUp 0.8s 0.15s ease both;
+      }
+      .tab-btn {
+        background: none;
+        border: none;
+        padding: 12px 0;
+        margin-right: 32px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+        font-weight: 400;
+      }
+      .tab-btn.active {
+        color: var(--warm-dark);
+        border-bottom-color: var(--terracotta);
+      }
+      .tab-btn:hover:not(.active) {
+        color: var(--brown);
+      }
+
+      /* ── Tab panels ── */
+      .tab-panel {
+        display: none;
+        padding-top: 36px;
+        animation: fadeUp 0.4s ease both;
+      }
+      .tab-panel.active {
+        display: block;
+      }
+
+      /* ── Section headings ── */
+      .section-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 22px;
+        font-weight: 300;
+        color: var(--warm-dark);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      /* ── Form ── */
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px 20px;
+        margin-bottom: 18px;
+      }
+      @media (max-width: 480px) {
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .field label {
+        font-size: 9px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      .field label .req {
+        color: var(--terracotta);
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--border-warm);
+        border-radius: 2px;
+        padding: 11px 14px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 300;
+        color: var(--warm-dark);
+        outline: none;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        border-color: var(--terracotta);
+        background: #fff;
+      }
+      .field input::placeholder,
+      .field textarea::placeholder {
+        color: var(--muted);
+        opacity: 0.6;
+      }
+      .field .hint {
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+      .field .err {
+        font-size: 11px;
+        color: var(--terracotta);
+      }
+
+      /* ── Plus one box ── */
+      .plus-one-box {
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid var(--border-warm);
+        border-radius: 2px;
+        padding: 16px 18px;
+        margin-bottom: 18px;
+      }
+      .plus-one-box label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--brown);
+        user-select: none;
+      }
+      .plus-one-box input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--terracotta);
+        cursor: pointer;
+      }
+      .plus-one-name {
+        margin-top: 12px;
+      }
+
+      /* ── Comment textarea ── */
+      .field textarea {
+        min-height: 80px;
+        resize: vertical;
+        line-height: 1.6;
+      }
+
+      /* ── Buttons ── */
+      .btn-primary {
+        background: var(--terracotta);
+        color: #fff;
+        border: none;
+        padding: 14px 36px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 500;
+        cursor: pointer;
+        border-radius: 2px;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .btn-primary:hover {
+        background: var(--brown);
+        transform: translateY(-1px);
+      }
+      .btn-secondary {
+        background: none;
+        color: var(--muted);
+        border: 1px solid var(--border-warm);
+        padding: 13px 24px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 2px;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .btn-secondary:hover {
+        border-color: var(--brown);
+        color: var(--brown);
+      }
+      .btn-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      /* ── Privacy note ── */
+      .privacy-note {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 14px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* ── Confirmed RSVP card ── */
+      .confirmed-card {
+        border: 1px solid var(--border-warm);
+        border-radius: 2px;
+        padding: 24px 28px;
+        background: rgba(255, 255, 255, 0.5);
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .confirmed-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+      }
+      .confirmed-card.going::before {
+        background: var(--sage);
+      }
+      .confirmed-card.maybe::before {
+        background: var(--gold);
+      }
+      .confirmed-card.no::before {
+        background: var(--muted);
+      }
+      .confirmed-top {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 12px;
+      }
+      .avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .confirmed-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 22px;
+        font-weight: 300;
+        color: var(--warm-dark);
+      }
+      .rsvp-badge {
+        display: inline-block;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-weight: 500;
+        margin-top: 2px;
+      }
+      .badge-going {
+        background: var(--sage-pale);
+        color: var(--sage);
+      }
+      .badge-maybe {
+        background: var(--gold-pale);
+        color: var(--gold);
+      }
+      .badge-no {
+        background: #f0edea;
+        color: var(--muted);
+      }
+      .confirmed-plus {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      .update-hint {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+
+      /* ── Lookup section ── */
+      .lookup-divider {
+        margin-top: 40px;
+        padding-top: 32px;
+        border-top: 1px dashed var(--border-warm);
+      }
+      .lookup-title {
+        font-size: 10px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+      .lookup-desc {
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+      .lookup-row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .lookup-row input {
+        flex: 1;
+        min-width: 180px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--border-warm);
+        border-radius: 2px;
+        padding: 11px 14px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 300;
+        color: var(--warm-dark);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .lookup-row input:focus {
+        border-color: var(--terracotta);
+      }
+      .lookup-row input.error {
+        border-color: var(--terracotta);
+        background: var(--terra-pale);
+      }
+      .btn-lookup {
+        background: none;
+        border: 1px solid var(--border-warm);
+        border-radius: 2px;
+        padding: 11px 20px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--brown);
+        cursor: pointer;
+        white-space: nowrap;
+        font-weight: 500;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .btn-lookup:hover {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: var(--brown);
+      }
+      .lookup-error {
+        font-size: 12px;
+        color: var(--terracotta);
+        margin-top: 8px;
+        line-height: 1.5;
+      }
+
+      /* ── Toast ── */
+      .toast {
+        position: fixed;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: var(--warm-dark);
+        color: var(--cream);
+        padding: 14px 24px;
+        border-radius: 2px;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        opacity: 0;
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+        z-index: 1000;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* ── Guest list ── */
+      .guest-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+      .guest-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 18px;
+        background: rgba(255, 255, 255, 0.45);
+        border: 1px solid var(--border);
+        margin-bottom: 6px;
+        border-radius: 2px;
+        animation: fadeUp 0.3s ease both;
+      }
+      .guest-name {
+        flex: 1;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 18px;
+        font-weight: 300;
+        color: var(--warm-dark);
+      }
+      .guest-plus {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 1px;
+      }
+      .empty-state {
+        text-align: center;
+        padding: 60px 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 20px;
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      /* ── Comments ── */
+      .comment-form {
+        margin-bottom: 28px;
+      }
+      .comment-inputs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .comment-inputs input {
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--border-warm);
+        border-radius: 2px;
+        padding: 10px 14px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 300;
+        color: var(--warm-dark);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .comment-inputs input:focus {
+        border-color: var(--terracotta);
+      }
+      .comment-inputs .inp-name {
+        flex: 0 0 150px;
+      }
+      .comment-inputs .inp-text {
+        flex: 1;
+        min-width: 200px;
+      }
+      .btn-post {
+        background: var(--terracotta);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 2px;
+        font-weight: 500;
+        transition: background 0.2s;
+        white-space: nowrap;
+      }
+      .btn-post:hover {
+        background: var(--brown);
+      }
+      .comment-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+      .comment-item {
+        display: flex;
+        gap: 14px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border);
+        animation: fadeUp 0.3s ease both;
+      }
+      .comment-item:first-child {
+        border-top: 1px solid var(--border);
+      }
+      .comment-body {
+        flex: 1;
+      }
+      .comment-meta {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 5px;
+      }
+      .comment-author {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--warm-dark);
+      }
+      .comment-date {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .comment-text {
+        font-size: 14px;
+        color: var(--brown);
+        line-height: 1.7;
+        font-weight: 300;
+      }
+
+      /* ── Confetti ── */
+      .confetti-piece {
+        position: fixed;
+        top: -10px;
+        pointer-events: none;
+        z-index: 9999;
+        border-radius: 2px;
+        animation: confettiFall linear forwards;
+      }
+      @keyframes confettiFall {
+        to {
+          transform: translateY(110vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+
+      /* ── Animations ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── Footer ── */
+      .page-footer {
+        text-align: center;
+        padding: 40px 0 0;
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 1px;
+        border-top: 1px solid var(--border);
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- Hero -->
+      <header class="hero">
+        <div class="hero-eyebrow">You're invited</div>
+        <h1>Summer<br /><em>Rooftop</em><br />Party</h1>
+        <p class="hero-host">Hosted by Alex Rivera</p>
+
+        <!-- Event image — swap the src with your photo URL -->
+        <div class="event-image-wrap">
+          <img
+            src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&q=80"
+            alt="Event photo"
+          />
+        </div>
+
+        <div class="hero-details">
+          <div class="hero-detail">
+            <span class="label">When</span> Saturday, July 12, 2025 · 7 PM –
+            Midnight
+          </div>
+          <div class="hero-detail">
+            <span class="label">Where</span> The Penthouse, 123 Fifth Ave, New
+            York
+          </div>
+        </div>
+        <p class="hero-description">
+          Come celebrate summer on the rooftop — drinks, music, and the best
+          views in the city. Dress code: colorful &amp; festive.
+        </p>
+        <a
+          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Summer+Rooftop+Party&dates=20250712T230000Z/20250713T040000Z&details=Come+celebrate+summer!&location=The+Penthouse,+123+Fifth+Ave,+New+York+NY"
+          target="_blank"
+          class="cal-link"
+        >
+          Add to Google Calendar
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+
+        <!-- Stats -->
+        <div class="stats" id="stats">
+          <div class="stat stat-going">
+            <div class="stat-num" id="stat-going">0</div>
+            <div class="stat-label">Going</div>
+          </div>
+          <div class="stat stat-maybe">
+            <div class="stat-num" id="stat-maybe">0</div>
+            <div class="stat-label">Maybe</div>
+          </div>
+          <div class="stat stat-no">
+            <div class="stat-num" id="stat-no">0</div>
+            <div class="stat-label">Can't make it</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" id="stat-heads">0</div>
+            <div class="stat-label">Total</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Tabs -->
+      <nav class="tabs">
+        <button class="tab-btn active" data-tab="rsvp">RSVP</button>
+        <button class="tab-btn" data-tab="guests">Guest List</button>
+        <button class="tab-btn" data-tab="comments">Comments</button>
+      </nav>
+
+      <!-- ── RSVP Tab ── -->
+      <div class="tab-panel active" id="tab-rsvp">
+        <!-- Confirmed view -->
+        <div id="confirmed-view" style="display: none">
+          <div class="confirmed-card" id="confirmed-card">
+            <div class="confirmed-top">
+              <div class="avatar" id="confirmed-avatar"></div>
+              <div>
+                <div class="confirmed-name" id="confirmed-name"></div>
+                <span class="rsvp-badge" id="confirmed-badge"></span>
+              </div>
+            </div>
+            <div class="confirmed-plus" id="confirmed-plus"></div>
+          </div>
+          <p class="update-hint">Plans changed? Update your RSVP anytime.</p>
+          <button class="btn-secondary" onclick="enterEditMode()">
+            Edit my RSVP
+          </button>
+        </div>
+
+        <!-- Form view -->
+        <div id="form-view">
+          <div class="form-grid">
+            <div class="field">
+              <label>Your Name <span class="req">*</span></label>
+              <input
+                type="text"
+                id="f-name"
+                placeholder="Full name"
+                autocomplete="name"
+              />
+            </div>
+            <div class="field">
+              <label>Email <span class="req">*</span></label>
+              <input
+                type="email"
+                id="f-email"
+                placeholder="your@email.com"
+                autocomplete="email"
+              />
+              <span class="hint">Used to edit your RSVP — private to host</span>
+            </div>
+            <div class="field">
+              <label>Phone</label>
+              <input
+                type="tel"
+                id="f-phone"
+                placeholder="(555) 000-0000"
+                autocomplete="tel"
+              />
+            </div>
+            <div class="field">
+              <label>Attendance</label>
+              <select id="f-status">
+                <option value="going">Going ✓</option>
+                <option value="maybe">Maybe ~</option>
+                <option value="no">Can't make it ✗</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="plus-one-box">
+            <label>
+              <input
+                type="checkbox"
+                id="f-plusone"
+                onchange="togglePlusOneName()"
+              />
+              Bringing a +1?
+            </label>
+            <div
+              class="plus-one-name"
+              id="plus-one-name-wrap"
+              style="display: none"
+            >
+              <div class="field" style="margin-top: 0">
+                <input
+                  type="text"
+                  id="f-plusname"
+                  placeholder="+1 name (optional)"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom: 22px">
+            <label>Leave a note (optional)</label>
+            <textarea
+              id="f-comment"
+              placeholder="So excited! Can I bring anything? 🎂"
+            ></textarea>
+          </div>
+
+          <div class="btn-row">
+            <button class="btn-primary" id="submit-btn" onclick="submitRSVP()">
+              Count me in
+            </button>
+            <button
+              class="btn-secondary"
+              id="cancel-btn"
+              style="display: none"
+              onclick="cancelEdit()"
+            >
+              Cancel
+            </button>
+          </div>
+          <p class="privacy-note">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+            Email &amp; phone are private — visible only to the host
+          </p>
+        </div>
+
+        <!-- Lookup section -->
+        <div class="lookup-divider" id="lookup-section">
+          <p class="lookup-title">Already RSVPed?</p>
+          <p class="lookup-desc">
+            On a new device? Enter the email you used and we'll pull up your
+            RSVP to edit.
+          </p>
+          <div class="lookup-row">
+            <input
+              type="email"
+              id="lookup-email"
+              placeholder="your@email.com"
+              onkeydown="if (event.key === 'Enter') doLookup();"
+            />
+            <button class="btn-lookup" onclick="doLookup()">
+              Find my RSVP →
+            </button>
+          </div>
+          <p class="lookup-error" id="lookup-error" style="display: none"></p>
+        </div>
+      </div>
+
+      <!-- ── Guest List Tab ── -->
+      <div class="tab-panel" id="tab-guests">
+        <div id="guest-list-inner">
+          <div class="empty-state">No RSVPs yet — be the first.</div>
+        </div>
+      </div>
+
+      <!-- ── Comments Tab ── -->
+      <div class="tab-panel" id="tab-comments">
+        <div class="comment-form">
+          <div class="comment-inputs">
+            <input
+              type="text"
+              class="inp-name"
+              id="c-name"
+              placeholder="Your name"
+            />
+            <input
+              type="text"
+              class="inp-text"
+              id="c-text"
+              placeholder="Leave a note for the group..."
+              onkeydown="if (event.key === 'Enter') submitComment();"
+            />
+            <button class="btn-post" onclick="submitComment()">Post</button>
+          </div>
+        </div>
+        <div class="comment-list" id="comment-list">
+          <div class="empty-state">
+            No comments yet — start the conversation.
+          </div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <p>🔒 Contact info is private · visible only to the host</p>
+      </footer>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+      // ── Storage helpers ──
+      const SHARED_KEY = "party_rsvps_v2";
+      const PRIVATE_KEY = "party_private_v2";
+      const COMMENTS_KEY = "party_comments_v2";
+
+      async function sGet(key, shared = false) {
+        try {
+          const r = await window.storage.get(key, shared);
+          return r ? JSON.parse(r.value) : null;
+        } catch {
+          return null;
+        }
+      }
+      async function sSet(key, val, shared = false) {
+        try {
+          await window.storage.set(key, JSON.stringify(val), shared);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      // ── State ──
+      let rsvps = [];
+      let privateData = {};
+      let comments = [];
+      let myRsvp = null;
+      let isEditing = false;
+
+      const AVATAR_COLORS = [
+        "#C4622D",
+        "#6B7E5A",
+        "#C9963A",
+        "#7B6FA0",
+        "#5B8FA8",
+        "#A06B4A",
+      ];
+      function avatarColor(name) {
+        return AVATAR_COLORS[name.charCodeAt(0) % AVATAR_COLORS.length];
+      }
+      function initials(name) {
+        return name
+          .split(" ")
+          .map((w) => w[0])
+          .slice(0, 2)
+          .join("")
+          .toUpperCase();
+      }
+
+      // ── Init ──
+      async function init() {
+        [rsvps, privateData, comments] = await Promise.all([
+          sGet(SHARED_KEY, true).then((v) => v || []),
+          sGet(PRIVATE_KEY, true).then((v) => v || {}),
+          sGet(COMMENTS_KEY, true).then((v) => v || []),
+        ]);
+
+        // Load shared data
+        renderStats();
+        renderGuestList();
+        renderComments();
+        // Check if we're the same device
+        const myId = await sGet("party_my_id");
+        if (myId && privateData[myId]) {
+          myRsvp = privateData[myId];
+          showConfirmed();
+          hideLookup();
+        }
+      }
+
+      // ── Tabs ──
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".tab-btn")
+            .forEach((b) => b.classList.remove("active"));
+          document
+            .querySelectorAll(".tab-panel")
+            .forEach((p) => p.classList.remove("active"));
+          btn.classList.add("active");
+          document
+            .getElementById("tab-" + btn.dataset.tab)
+            .classList.add("active");
+          // Update tab label
+          const rsvpTab = document.querySelector('[data-tab="rsvp"]');
+          rsvpTab.textContent = myRsvp && !isEditing ? "My RSVP" : "RSVP";
+          const cTab = document.querySelector('[data-tab="comments"]');
+          cTab.textContent = comments.length
+            ? `Comments (${comments.length})`
+            : "Comments";
+        });
+      });
+
+      // ── Submit RSVP ──
+      async function submitRSVP() {
+        const name = document.getElementById("f-name").value.trim();
+        const email = document
+          .getElementById("f-email")
+          .value.trim()
+          .toLowerCase();
+        if (!name || !email) {
+          showToast("Please enter your name and email.");
+          return;
+        }
+
+        const id = myRsvp?.id || Date.now().toString();
+        const status = document.getElementById("f-status").value;
+        const plusOne = document.getElementById("f-plusone").checked;
+        const plusName = document.getElementById("f-plusname").value.trim();
+        const phone = document.getElementById("f-phone").value.trim();
+        const comment = document.getElementById("f-comment").value.trim();
+
+        const pub = {
+          id,
+          name,
+          status,
+          plusOne,
+          plusOneName: plusName,
+          ts: Date.now(),
+        };
+        const priv = { ...pub, email, phone, comment };
+
+        rsvps = [...rsvps.filter((r) => r.id !== id), pub];
+        privateData = { ...privateData, [id]: priv };
+
+        await sSet(SHARED_KEY, rsvps, true);
+        await sSet(PRIVATE_KEY, privateData, true);
+        await sSet("party_my_id", id);
+
+        if (comment && !myRsvp?.comment) {
+          comments = [...comments, { name, text: comment, ts: Date.now() }];
+          await sSet(COMMENTS_KEY, comments, true);
+        }
+
+        myRsvp = priv;
+        isEditing = false;
+        renderStats();
+        renderGuestList();
+        renderComments();
+        showConfirmed();
+        hideLookup();
+        if (status === "going") fireConfetti();
+        showToast(
+          status === "going" ? "🎉 You're on the list!" : "✓ RSVP saved.",
+        );
+        document.querySelector('[data-tab="guests"]').click();
+      }
+
+      // ── Lookup by email ──
+      async function doLookup() {
+        const email = document
+          .getElementById("lookup-email")
+          .value.trim()
+          .toLowerCase();
+        if (!email) return;
+        const inp = document.getElementById("lookup-email");
+        const err = document.getElementById("lookup-error");
+
+        // Refresh private data
+        privateData = (await sGet(PRIVATE_KEY, true)) || {};
+        const match = Object.values(privateData).find((r) => r.email === email);
+        if (match) {
+          myRsvp = match;
+          await sSet("party_my_id", match.id);
+          populateForm(match);
+          enterEditMode();
+          document.getElementById("lookup-email").value = "";
+          inp.classList.remove("error");
+          err.style.display = "none";
+          showToast("RSVP found — edit below.");
+        } else {
+          inp.classList.add("error");
+          err.textContent =
+            "No RSVP found for that email. Double-check or submit a new one above.";
+          err.style.display = "block";
+        }
+      }
+
+      function populateForm(r) {
+        document.getElementById("f-name").value = r.name || "";
+        document.getElementById("f-email").value = r.email || "";
+        document.getElementById("f-phone").value = r.phone || "";
+        document.getElementById("f-status").value = r.status || "going";
+        document.getElementById("f-plusone").checked = r.plusOne || false;
+        document.getElementById("f-plusname").value = r.plusOneName || "";
+        document.getElementById("f-comment").value = r.comment || "";
+        togglePlusOneName();
+      }
+
+      // ── Edit mode ──
+      function enterEditMode() {
+        isEditing = true;
+        if (myRsvp) populateForm(myRsvp);
+        document.getElementById("confirmed-view").style.display = "none";
+        document.getElementById("form-view").style.display = "block";
+        document.getElementById("cancel-btn").style.display = "inline-block";
+        document.getElementById("submit-btn").textContent = "Save changes";
+        hideLookup();
+      }
+
+      function cancelEdit() {
+        isEditing = false;
+        document.getElementById("cancel-btn").style.display = "none";
+        document.getElementById("submit-btn").textContent = "Count me in";
+        showConfirmed();
+      }
+
+      function showConfirmed() {
+        if (!myRsvp) return;
+        document.getElementById("confirmed-view").style.display = "block";
+        document.getElementById("form-view").style.display = "none";
+        const card = document.getElementById("confirmed-card");
+        card.className = "confirmed-card " + myRsvp.status;
+        document.getElementById("confirmed-name").textContent = myRsvp.name;
+        const av = document.getElementById("confirmed-avatar");
+        av.textContent = initials(myRsvp.name);
+        av.style.background = avatarColor(myRsvp.name);
+        const badge = document.getElementById("confirmed-badge");
+        badge.textContent = myRsvp.status === "going" ? "Going" : "Maybe";
+        badge.className =
+          "rsvp-badge " +
+          (myRsvp.status === "going" ? "badge-going" : "badge-maybe");
+        const plus = document.getElementById("confirmed-plus");
+        plus.textContent = myRsvp.plusOne
+          ? `+1: ${myRsvp.plusOneName || "Guest"}`
+          : "";
+        document.querySelector('[data-tab="rsvp"]').textContent = "My RSVP";
+      }
+
+      function hideLookup() {
+        document.getElementById("lookup-section").style.display = "none";
+      }
+
+      // ── Render stats ──
+      function renderStats() {
+        const going = rsvps.filter((r) => r.status === "going");
+        const maybe = rsvps.filter((r) => r.status === "maybe");
+        const no = rsvps.filter((r) => r.status === "no");
+        const heads = [...going, ...maybe].reduce(
+          (a, r) => a + 1 + (r.plusOne ? 1 : 0),
+          0,
+        );
+        document.getElementById("stat-going").textContent = going.length;
+        document.getElementById("stat-maybe").textContent = maybe.length;
+        document.getElementById("stat-no").textContent = no.length;
+        document.getElementById("stat-heads").textContent = heads;
+      }
+
+      // ── Render guest list ──
+      function renderGuestList() {
+        const going = rsvps.filter((r) => r.status === "going");
+        const maybe = rsvps.filter((r) => r.status === "maybe");
+        const no = rsvps.filter((r) => r.status === "no");
+        const el = document.getElementById("guest-list-inner");
+        if (!rsvps.length) {
+          el.innerHTML =
+            '<div class="empty-state">No RSVPs yet — be the first.</div>';
+          return;
+        }
+
+        let html = "";
+        if (going.length) {
+          html += `<div class="section-title">Going <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--sage);font-style:normal;font-weight:400">${going.length}</span></div>`;
+          html += '<div class="guest-list">';
+          going.forEach((r) => {
+            html += guestRow(r);
+          });
+          html += "</div>";
+        }
+        if (maybe.length) {
+          html += `<div class="section-title" style="margin-top:28px">Maybe <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--gold);font-style:normal;font-weight:400">${maybe.length}</span></div>`;
+          html += '<div class="guest-list">';
+          maybe.forEach((r) => {
+            html += guestRow(r);
+          });
+          html += "</div>";
+        }
+        if (no.length) {
+          html += `<div class="section-title" style="margin-top:28px">Can't make it <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:var(--muted);font-style:normal;font-weight:400">${no.length}</span></div>`;
+          html += '<div class="guest-list">';
+          no.forEach((r) => {
+            html += guestRow(r);
+          });
+          html += "</div>";
+        }
+        el.innerHTML = html;
+      }
+
+      function guestRow(r) {
+        const badge =
+          r.status === "going"
+            ? `<span class="rsvp-badge badge-going">Going</span>`
+            : `<span class="rsvp-badge badge-maybe">Maybe</span>`;
+        const plus = r.plusOne
+          ? `<div class="guest-plus">+ ${r.plusOneName || "a guest"}</div>`
+          : "";
+        return `
+    <div class="guest-row">
+      <div class="avatar" style="background:${avatarColor(r.name)}">${initials(r.name)}</div>
+      <div style="flex:1">
+        <div class="guest-name">${r.name}</div>${plus}
+      </div>
+      ${badge}
+    </div>`;
+      }
+
+      // ── Render comments ──
+      function renderComments() {
+        const el = document.getElementById("comment-list");
+        const cTab = document.querySelector('[data-tab="comments"]');
+        if (cTab)
+          cTab.textContent = comments.length
+            ? `Comments (${comments.length})`
+            : "Comments";
+        if (!comments.length) {
+          el.innerHTML =
+            '<div class="empty-state">No comments yet — start the conversation.</div>';
+          return;
+        }
+        el.innerHTML = [...comments]
+          .reverse()
+          .map(
+            (c) => `
+    <div class="comment-item">
+      <div class="avatar" style="background:${avatarColor(c.name)};width:36px;height:36px;font-size:13px;flex-shrink:0">${initials(c.name)}</div>
+      <div class="comment-body">
+        <div class="comment-meta">
+          <span class="comment-author">${c.name}</span>
+          <span class="comment-date">${new Date(c.ts).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</span>
+        </div>
+        <p class="comment-text">${c.text}</p>
+      </div>
+    </div>`,
+          )
+          .join("");
+      }
+
+      async function submitComment() {
+        const name = document.getElementById("c-name").value.trim();
+        const text = document.getElementById("c-text").value.trim();
+        if (!name || !text) return;
+        comments = [...comments, { name, text, ts: Date.now() }];
+        await sSet(COMMENTS_KEY, comments, true);
+        renderComments();
+        document.getElementById("c-text").value = "";
+      }
+
+      // ── Misc helpers ──
+      function togglePlusOneName() {
+        const show = document.getElementById("f-plusone").checked;
+        document.getElementById("plus-one-name-wrap").style.display = show
+          ? "block"
+          : "none";
+      }
+
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 3200);
+      }
+
+      function fireConfetti() {
+        const colors = [
+          "#C4622D",
+          "#C9963A",
+          "#6B7E5A",
+          "#7B6FA0",
+          "#5B8FA8",
+          "#E8896A",
+          "#F7F2EA",
+        ];
+        for (let i = 0; i < 50; i++) {
+          const el = document.createElement("div");
+          el.className = "confetti-piece";
+          const size = 6 + Math.random() * 8;
+          el.style.cssText = `left:${Math.random() * 100}vw;width:${size}px;height:${size}px;
+      background:${colors[i % colors.length]};opacity:${0.7 + Math.random() * 0.3};
+      animation-duration:${2 + Math.random() * 1.5}s;animation-delay:${Math.random() * 0.8}s;
+      transform:rotate(${Math.random() * 360}deg)`;
+          document.body.appendChild(el);
+          el.addEventListener("animationend", () => el.remove());
+        }
+      }
+
+      init();
+    </script>
+  </body>
+</html>

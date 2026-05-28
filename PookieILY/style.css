@@ -1,0 +1,142 @@
+* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+        background-image: url(/PookieILY/imgs/sunrise.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        overflow-x: hidden;
+        font-family: "Arial", sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        font-size: 2.5em;
+        margin-top: 20px;
+      }
+      p {
+        font-size: x-large;
+      }
+
+      button  {
+        position: fixed;
+        top: 90%;
+        right: 50%;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: rgba(18, 70, 226, 0.7);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: rgba(255, 85, 0, 0.9);
+      }
+      
+
+      .container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .state-image {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        background-size: cover;
+        background-position: center;
+        border: 3px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        transform-style: preserve-3d;
+      }
+
+      .state-image:hover {
+        transform: scale(1.1) translateZ(10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .state-image.zoomed {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) scale(2.5) !important;
+        z-index: 1000;
+        border-radius: 5px;
+        box-shadow: 0 2px 80px rgba(0, 0, 0, 0.6);
+      }
+
+      .state-image.flipped {
+        transform: translate(-50%, -50%) scale(2.5) rotateY(180deg) !important;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease;
+        z-index: 999;
+      }
+
+      .overlay.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .state-label {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+      }
+
+      .instructions {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        color: white;
+        font-size: 16px;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 15px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+      }
+
+      @media (max-width: 768px) {
+        .state-image {
+          width: 80px;
+          height: 80px;
+        }
+
+        .instructions {
+          font-size: 14px;
+          padding: 10px;
+        }
+      }
